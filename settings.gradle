@@ -1,0 +1,3 @@
+rootProject.name = 'synopsis-metadata'
+
+include 'api', 'common', 'ingest', 'dataset', 'user', 'rest', 'dist'

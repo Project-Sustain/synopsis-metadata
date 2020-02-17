@@ -1,0 +1,14 @@
+plugins {
+    id 'java-library-distribution'
+}
+
+dependencies {
+    compile project(':dataset')
+    compile project(':ingest')
+}
+
+//distributions {
+//    main {
+//        baseName = 'synopsis-metadata'
+//    }
+//}

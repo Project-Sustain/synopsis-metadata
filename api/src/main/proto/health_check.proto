@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package sustain.synopsis.metadata;
+
+message HealthCheckRequest {
+
+}
+
+message HealthCheckResponse {
+    bool is_healthy = 1;
+}

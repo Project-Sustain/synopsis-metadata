@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package sustain.synopsis.metadata;
+
+import "dataset_info.proto";
+import "health_check.proto";
+
+message RegisterDatasetRequest {
+    DatasetInfo datasetInfo = 1;
+}
+
+message RegisterDatasetResponse {
+
+}
+
+message GetDatasetInfoRequest {
+    string id = 1;
+}
+
+message GetDatasetInfoResponse {
+    DatasetInfo datasetInfo = 1;
+}
+
+message GetDatasetInfosRequest {
+
+}
+
+message GetDatasetInfosResponse {
+    repeated DatasetInfo info = 1;
+}
+
+service DatasetService {
+    rpc checkHealth (HealthCheckRequest) returns (HealthCheckResponse);
+    rpc registerDataset (RegisterDatasetRequest) returns (RegisterDatasetResponse);
+    rpc getDatasetInfo (GetDatasetInfoRequest) returns (GetDatasetInfoResponse);
+    rpc getDatasetInfos (GetDatasetInfosRequest) returns (GetDatasetInfosResponse);
+}

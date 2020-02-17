@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package sustain.synopsis.metadata;
+
+import "dataset_info.proto";
+import "health_check.proto";
+
+message RegisterUserRequest {
+    string email = 1;
+    string password = 2;
+}
+
+message RegisterUserResponse {
+    bool success = 1;
+    string description = 2;
+}
+
+message AuthenticateRequest {
+    string email = 1;
+    string password = 2;
+}
+
+message AuthenticateResponse {
+    bool success = 1;
+    string description = 2;
+    string token = 3;
+}
+
+
+service UserService {
+    rpc checkHealth (HealthCheckRequest) returns (HealthCheckResponse);
+    rpc registerUser (RegisterUserRequest) returns (RegisterUserResponse);
+    rpc authenticate (AuthenticateRequest) returns (AuthenticateResponse);
+}
