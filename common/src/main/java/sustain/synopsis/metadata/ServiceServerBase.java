@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
+import sustain.synopsis.metadata.config.ClusterConfig;
 
 public class ServiceServerBase {
 

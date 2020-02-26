@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package sustain.synopsis.metadata;
 
-import "dataset_info.proto";
 import "health_check.proto";
 
 message RegisterUserRequest {

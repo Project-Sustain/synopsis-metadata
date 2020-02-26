@@ -6,7 +6,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import sustain.synopsis.metadata.DatasetServiceGrpc.DatasetServiceBlockingStub;
+import sustain.synopsis.metadata.config.ClusterConfig;
+import sustain.synopsis.metadata.config.DatabaseConfig;
+import sustain.synopsis.metadata.config.ServerConfig;
 import sustain.synopsis.metadata.dataset.DatasetServiceServer;
+import sustain.synopsis.metadata.util.TestUtils;
 
 import static sustain.synopsis.metadata.DatasetServiceOuterClass.*;
 
@@ -43,21 +47,21 @@ public class Test1 {
         stub = DatasetServiceGrpc.newBlockingStub(channel);
     }
 
-    @Test
-    public void testRegisterDataset() throws Exception {
-        DatasetInfoOuterClass.DatasetInfo info = DatasetInfoOuterClass.DatasetInfo.newBuilder()
-                .setDatasetId(TestUtils.generateRandomString(16))
-                .setBinConfig("myBinConfig")
-                .setTemporalBracketLength(100000)
-                .setGeohashLength(3)
-                .build();
-
-        RegisterDatasetRequest req = RegisterDatasetRequest.newBuilder()
-                .setDatasetInfo(info)
-                .build();
-
-        RegisterDatasetResponse resp = stub.registerDataset(req);
-    }
+//    @Test
+//    public void testRegisterDataset() throws Exception {
+//        DatasetInfoOuterClass.DatasetInfo info = DatasetInfoOuterClass.DatasetInfo.newBuilder()
+//                .setDatasetId(TestUtils.generateRandomString(16))
+//                .setBinConfig("myBinConfig")
+//                .setTemporalBracketLength(100000)
+//                .setGeohashLength(3)
+//                .build();
+//
+//        RegisterDatasetRequest req = RegisterDatasetRequest.newBuilder()
+//                .setDatasetInfo(info)
+//                .build();
+//
+//        RegisterDatasetResponse resp = stub.registerDataset(req);
+//    }
 
     @After
     public void after() {

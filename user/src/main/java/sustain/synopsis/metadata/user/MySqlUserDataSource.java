@@ -1,12 +1,11 @@
 package sustain.synopsis.metadata.user;
 
-import sustain.synopsis.metadata.DatabaseConfig;
+import sustain.synopsis.metadata.config.DatabaseConfig;
 import sustain.synopsis.metadata.MySqlDataSource;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 
 public class MySqlUserDataSource extends MySqlDataSource implements UserDataSource {
 

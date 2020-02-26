@@ -1,4 +1,4 @@
-package sustain.synopsis.metadata.dataset;
+package sustain.synopsis.metadata.query;
 
 import io.grpc.ServerBuilder;
 import sustain.synopsis.metadata.config.ClusterConfig;
@@ -6,20 +6,20 @@ import sustain.synopsis.metadata.ServiceServerBase;
 
 import java.sql.SQLException;
 
-public class DatasetServiceServer extends ServiceServerBase {
+public class QueryServiceServer extends ServiceServerBase {
 
-    public DatasetServiceServer(ClusterConfig config) throws SQLException, ClassNotFoundException {
+    public QueryServiceServer(ClusterConfig config) throws SQLException, ClassNotFoundException {
         this.clusterConfig = config;
         this.server = ServerBuilder
                 .forPort(clusterConfig.getDataset_server().getPort())
-                .addService(new DatasetService(clusterConfig))
+                .addService(new QueryService(clusterConfig))
                 .build();
     }
 
     public static void main(String[] args) {
         String configPath = args[0];
         try {
-            DatasetServiceServer server = new DatasetServiceServer(ServiceServerBase.getClusterConfigFromPath(configPath));
+            QueryServiceServer server = new QueryServiceServer(ServiceServerBase.getClusterConfigFromPath(configPath));
             server.start();
             server.blockUntilShutdown();
 

@@ -5,9 +5,7 @@ import io.grpc.ManagedChannelBuilder;
 import org.springframework.web.bind.annotation.*;
 import sustain.synopsis.metadata.DatasetInfoOuterClass;
 import sustain.synopsis.metadata.DatasetServiceGrpc;
-import sustain.synopsis.metadata.DatasetServiceOuterClass;
 import sustain.synopsis.metadata.DatasetServiceOuterClass.*;
-import sustain.synopsis.metadata.UserServiceGrpc;
 
 import javax.validation.Valid;
 import java.util.ArrayList;

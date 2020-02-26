@@ -16,3 +16,8 @@ database:
   user: root
   password: password
   database_name: synopsis_metadata
+
+cassandra:
+  keyspace: synopsis_cassandra
+  host: localhost
+  port: 9042

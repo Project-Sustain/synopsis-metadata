@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package sustain.synopsis.metadata;
+
+import "health_check.proto";
+
+message QueryRequest {
+    string query = 1;
+}
+
+message QueryResponse {
+    string result = 1;
+}
+
+service QueryService {
+    rpc checkHealth (HealthCheckRequest) returns (HealthCheckResponse);
+    rpc query (QueryRequest) returns (QueryResponse);
+}

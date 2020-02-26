@@ -1,15 +1,10 @@
 package sustain.synopsis.metadata.user;
 
-import io.grpc.stub.StreamObserver;
-import io.grpc.stub.StreamObservers;
 import org.junit.Before;
 import org.junit.Test;
-import sustain.synopsis.metadata.ClusterConfig;
-import sustain.synopsis.metadata.DatabaseConfig;
-import sustain.synopsis.metadata.TestUtils;
-import sustain.synopsis.metadata.UserServiceOuterClass;
-import sustain.synopsis.metadata.UserServiceOuterClass.AuthenticateRequest;
-import sustain.synopsis.metadata.UserServiceOuterClass.AuthenticateResponse;
+import sustain.synopsis.metadata.config.ClusterConfig;
+import sustain.synopsis.metadata.config.DatabaseConfig;
+import sustain.synopsis.metadata.util.TestUtils;
 import sustain.synopsis.metadata.UserServiceOuterClass.RegisterUserRequest;
 
 import java.sql.SQLException;

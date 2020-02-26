@@ -1,6 +1,6 @@
 package sustain.synopsis.metadata.user;
 
-import sustain.synopsis.metadata.HashAlgorithm;
+import sustain.synopsis.metadata.util.HashAlgorithm;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;

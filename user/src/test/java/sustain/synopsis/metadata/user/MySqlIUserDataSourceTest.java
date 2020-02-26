@@ -3,8 +3,8 @@ package sustain.synopsis.metadata.user;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import sustain.synopsis.metadata.DatabaseConfig;
-import sustain.synopsis.metadata.TestUtils;
+import sustain.synopsis.metadata.config.DatabaseConfig;
+import sustain.synopsis.metadata.util.TestUtils;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;

@@ -1,8 +1,10 @@
 package sustain.synopsis.metadata.dataset;
 
 import io.grpc.stub.StreamObserver;
-import sustain.synopsis.metadata.ClusterConfig;
+import sustain.synopsis.metadata.HealthCheck;
+import sustain.synopsis.metadata.config.ClusterConfig;
 import sustain.synopsis.metadata.DatasetServiceGrpc;
+
 import java.sql.SQLException;
 import static sustain.synopsis.metadata.DatasetServiceOuterClass.*;
 
@@ -11,13 +13,13 @@ public class DatasetService extends DatasetServiceGrpc.DatasetServiceImplBase {
     private final DatasetDataSource dataSource;
 
     public DatasetService(ClusterConfig config) throws SQLException, ClassNotFoundException {
-         this.dataSource = new MySqlDatasetDataSource(config.getDatabase());
+         this.dataSource = new DatasetDataSource(config.getDatabase());
     }
 
     @Override
     public void registerDataset(RegisterDatasetRequest request, StreamObserver<RegisterDatasetResponse> responseObserver) {
         try {
-            dataSource.insertDataset(request.getDatasetInfo());
+            dataSource.insertDataset(request.getDatasetId());
             RegisterDatasetResponse resp = RegisterDatasetResponse.newBuilder().build();
             responseObserver.onNext(resp);
             responseObserver.onCompleted();
@@ -29,12 +31,28 @@ public class DatasetService extends DatasetServiceGrpc.DatasetServiceImplBase {
     }
 
     @Override
-    public void getDatasetInfo(GetDatasetInfoRequest request, StreamObserver<GetDatasetInfoResponse> responseObserver) {
+    public void createIngestSession(CreateIngestSessionRequest request, StreamObserver<CreateIngestSessionResponse> responseObserver) {
         try {
-            GetDatasetInfoResponse resp = GetDatasetInfoResponse.newBuilder()
-                    .setDatasetInfo(dataSource.getDatasetInfo(request.getId()))
+            dataSource.insertSession(
+                    request.getDatasetId(),
+                    request.getTemporalBracketLength(),
+                    request.getGeohashLength(),
+                    request.getBinConfig());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            responseObserver.onError(e);
+        }
+    }
+
+    @Override
+    public void getDatasetSessions(GetDatasetSessionsRequest request, StreamObserver<GetDatasetSessionsResponse> responseObserver) {
+        try {
+            GetDatasetSessionsResponse response = GetDatasetSessionsResponse.newBuilder()
+                    .addAllSession(dataSource.getDatasetSessions(request.getDatasetId()))
                     .build();
-            responseObserver.onNext(resp);
+
+            responseObserver.onNext(response);
             responseObserver.onCompleted();
 
         } catch (Exception e) {
@@ -44,18 +62,8 @@ public class DatasetService extends DatasetServiceGrpc.DatasetServiceImplBase {
     }
 
     @Override
-    public void getDatasetInfos(GetDatasetInfosRequest request, StreamObserver<GetDatasetInfosResponse> responseObserver) {
-        try {
-            GetDatasetInfosResponse resp = GetDatasetInfosResponse.newBuilder()
-                    .addAllInfo(dataSource.getDatasetInfos())
-                    .build();
-
-            responseObserver.onNext(resp);
-            responseObserver.onCompleted();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            responseObserver.onError(e);
-        }
+    public void checkHealth(HealthCheck.HealthCheckRequest request, StreamObserver<HealthCheck.HealthCheckResponse> responseObserver) {
+        super.checkHealth(request, responseObserver);
     }
+
 }

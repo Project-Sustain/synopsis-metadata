@@ -2,36 +2,48 @@ syntax = "proto3";
 
 package sustain.synopsis.metadata;
 
-import "dataset_info.proto";
+import "google/protobuf/timestamp.proto";
 import "health_check.proto";
-
-message RegisterDatasetRequest {
-    DatasetInfo datasetInfo = 1;
-}
-
-message RegisterDatasetResponse {
-
-}
-
-message GetDatasetInfoRequest {
-    string id = 1;
-}
-
-message GetDatasetInfoResponse {
-    DatasetInfo datasetInfo = 1;
-}
-
-message GetDatasetInfosRequest {
-
-}
-
-message GetDatasetInfosResponse {
-    repeated DatasetInfo info = 1;
-}
 
 service DatasetService {
     rpc checkHealth (HealthCheckRequest) returns (HealthCheckResponse);
     rpc registerDataset (RegisterDatasetRequest) returns (RegisterDatasetResponse);
-    rpc getDatasetInfo (GetDatasetInfoRequest) returns (GetDatasetInfoResponse);
-    rpc getDatasetInfos (GetDatasetInfosRequest) returns (GetDatasetInfosResponse);
+    rpc createIngestSession (CreateIngestSessionRequest) returns (CreateIngestSessionResponse);
+
+    rpc getDatasetSessions (GetDatasetSessionsRequest) returns (GetDatasetSessionsResponse);
+}
+
+message Session {
+    int64 sessionId = 1;
+    int64 temporalBracketLength= 2;
+    int32 geohashLength= 3;
+    string binConfig = 4;
+}
+
+message GetDatasetSessionsRequest {
+    string datasetId = 1;
+}
+
+message GetDatasetSessionsResponse {
+    repeated Session session = 1;
+}
+
+message RegisterDatasetRequest {
+    string datasetId = 1;
+
+}
+
+message RegisterDatasetResponse {}
+
+
+message CreateIngestSessionRequest {
+    string dataset_id = 1;
+    int64 temporalBracketLength= 2;
+    int32 geohashLength= 3;
+    string binConfig = 4;
+}
+
+message CreateIngestSessionResponse {
+    int64 session_id = 1;
+    google.protobuf.Timestamp created_at = 2;
 }

@@ -4,23 +4,27 @@
 DROP TABLE IF EXISTS dataset;
 CREATE TABLE dataset (
     id                          VARCHAR(64)     NOT NULL,
-    temporal_bracket_length     LONG            NOT NULL,
-    geohash_length              INT             NOT NULL,
-    bin_config                  TEXT            NOT NULL,
     created_at                  TIMESTAMP       NOT NULL,
-    updated_at                  TIMESTAMP       NOT NULL DEFAULT NOW() ON UPDATE NOW(),
     PRIMARY KEY (id)
 );
 
-# INGEST SERVICE
-DROP TABLE IF EXISTS ingest_session;
-CREATE TABLE ingest_session (
-   dataset_id               VARCHAR(64)     NOT NULL,
-   session_id               INT             NOT NULL,
-   creator_client_id        VARCHAR(64)     NOT NULL,
-   created_at               TIMESTAMP       NOT NULL,
-   PRIMARY KEY (dataset_id, session_id),
-   INDEX(dataset_id)
+DROP TABLE IF EXISTS strand_schema;
+CREATE TABLE strand_schema (
+   id                          VARCHAR(64)     NOT NULL,
+   geohash_length              INT             NOT NULL,
+   temporal_bracket_length     LONG            NOT NULL,
+   bin_config                  TEXT            NOT NULL,
+   created_at                  TIMESTAMP       NOT NULL
+);
+
+DROP TABLE IF EXISTS session;
+CREATE TABLE session (
+    session_id                  BIGINT          NOT NULL AUTO_INCREMENT,
+    dataset_id                  VARCHAR(64)     NOT NULL,
+    strand_schema_id            VARCHAR(64)     NOT NULL,
+    created_at                  TIMESTAMP       NOT NULL,
+    PRIMARY KEY (session_id),
+    INDEX(dataset_id)
 );
 
 # USER SERVICE

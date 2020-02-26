@@ -1,10 +1,10 @@
 package sustain.synopsis.metadata.user;
 
 import io.grpc.stub.StreamObserver;
-import sustain.synopsis.metadata.ClusterConfig;
+import sustain.synopsis.metadata.config.ClusterConfig;
 import sustain.synopsis.metadata.HealthCheck.HealthCheckRequest;
 import sustain.synopsis.metadata.HealthCheck.HealthCheckResponse;
-import sustain.synopsis.metadata.JwtTokenUtil;
+import sustain.synopsis.metadata.util.JwtTokenUtil;
 import sustain.synopsis.metadata.UserServiceGrpc;
 import sustain.synopsis.metadata.UserServiceOuterClass.AuthenticateRequest;
 import sustain.synopsis.metadata.UserServiceOuterClass.AuthenticateResponse;

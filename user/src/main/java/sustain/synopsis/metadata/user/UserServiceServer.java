@@ -1,7 +1,7 @@
 package sustain.synopsis.metadata.user;
 
 import io.grpc.ServerBuilder;
-import sustain.synopsis.metadata.ClusterConfig;
+import sustain.synopsis.metadata.config.ClusterConfig;
 import sustain.synopsis.metadata.ServiceServerBase;
 
 import java.sql.SQLException;

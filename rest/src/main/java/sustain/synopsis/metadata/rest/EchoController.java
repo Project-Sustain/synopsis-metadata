@@ -15,8 +15,21 @@ public class EchoController {
 
     @RequestMapping(value="/api/echo2", method=RequestMethod.POST)
     @ResponseBody
-    public Echo echo(@RequestBody @Valid Echo echo) {
+    public Echo echo2(@RequestBody @Valid Echo echo) {
         return echo;
     }
+
+    @RequestMapping(value="/api/test", method=RequestMethod.GET)
+    @ResponseBody
+    public String echo3() {
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "test";
+    }
+
+
 
 }

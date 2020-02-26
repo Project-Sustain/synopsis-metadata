@@ -2,17 +2,11 @@ package sustain.synopsis.metadata.rest;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.Validator;
 import sustain.synopsis.metadata.rest.user.UserCredentials;
 
 import java.lang.reflect.Field;
 
-
 public class UserCredentialsTest {
-
-    @Autowired
-    private Validator validator;
 
     public boolean emailValidates(String email) throws NoSuchFieldException {
         Field field = UserCredentials.class.getDeclaredField("email");
